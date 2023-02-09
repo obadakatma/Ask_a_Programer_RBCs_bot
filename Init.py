@@ -21,7 +21,7 @@ class Init:
         self.message = ""
         self.messageId = 0
         self.chat_id = 0
-        self.groupId = os.environ.get("GROUPID")
+        self.groupId = -888711391
 
     def start(self, update: Update, context: CallbackContext):
         self.bot.send_message(chat_id=update.message.chat_id,
