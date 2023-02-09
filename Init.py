@@ -1,3 +1,5 @@
+import os
+
 import telegram
 from telegram.ext.callbackcontext import CallbackContext
 from telegram.ext.commandhandler import CommandHandler
@@ -12,15 +14,14 @@ class Init:
         self.updater = Updater(TOKEN, use_context=True)
         self.bot = telegram.Bot(TOKEN)
         self.startCommand = CommandHandler('start', self.start)
-        self.receivedPhoto = MessageHandler(Filters.photo , self.receivePhoto)
+        self.receivedPhoto = MessageHandler(Filters.photo, self.receivePhoto)
         self.receivedMessage = MessageHandler(Filters.text, self.receiveMessage)
         self.sendDocument = MessageHandler(Filters.document, self.senddocument)
         self.sendAudio = MessageHandler(Filters.voice, self.sendaudio)
         self.message = ""
         self.messageId = 0
         self.chat_id = 0
-        self.groupId = -888711391
-        # self.groupId = -873971130
+        self.groupId = os.environ.get("GROUPID")
 
     def start(self, update: Update, context: CallbackContext):
         self.bot.send_message(chat_id=update.message.chat_id,
